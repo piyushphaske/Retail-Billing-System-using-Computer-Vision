@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Billing System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Automated Retail Billing System</h1>
+        </header>
+        
+        <main>
+            <div class="video-container">
+                <h2>Camera Feed</h2>
+                <img src="{{ url_for('video_feed') }}" alt="Video Feed">
+            </div>
+            
+            <div class="bill-container">
+                <h2>Current Bill</h2>
+                <div id="bill-items">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Qty</th>
+                                <th>Price</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bill-items-body">
+                            <!-- Bill items will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="bill-summary">
+                    <div class="bill-row">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">$0.00</span>
+                    </div>
+                    <div class="bill-row">
+                        <span>Tax (7%):</span>
+                        <span id="tax">$0.00</span>
+                    </div>
+                    <div class="bill-row total">
+                        <span>Total:</span>
+                        <span id="total">$0.00</span>
+                    </div>
+                </div>
+                
+                <div class="bill-actions">
+                    <button id="stop-program" class="stop-button">Stop Program</button>
+                    <button id="generate-receipt">Generate Receipt</button>
+                    <button id="reset-bill">Reset Bill</button>
+                </div>
+                
+                <div id="message" class="hidden"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt - CV Billing System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/receipt-style.css') }}">
+</head>
+<body>
+    <div class="receipt-container">
+        <div class="receipt">
+            <div class="receipt-header">
+                <h1>Retail Billing Receipt</h1>
+                <p class="date-time">Date: {{ date_time }}</p>
+            </div>
+            
+            <div class="receipt-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Quantity</th>
+                            <th>Unit Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if items %}
+                            {% for item in items %}
+                            <tr>
+                                <td>{{ item.name }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>${{ "%.2f"|format(item.unit_price) }}</td>
+                                <td>${{ "%.2f"|format(item.total) }}</td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="4" class="no-items">No items detected</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+                
+                <div class="receipt-summary">
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span>${{ "%.2f"|format(subtotal) }}</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Tax (7%):</span>
+                        <span>${{ "%.2f"|format(tax) }}</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total:</span>
+                        <span>${{ "%.2f"|format(total) }}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="receipt-footer">
+                <p>Thank you for shopping with us!</p>
+                <div class="actions">
+                    <a href="/download_receipt" class="btn download-btn">Download PDF</a>
+                    <a href="/" class="btn back-btn">Back to Billing</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
