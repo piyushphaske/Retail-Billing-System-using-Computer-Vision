@@ -70,9 +70,6 @@ See `requirements.txt`:
 - flask
 - numpy
 
-## Example
-![Demo Screenshot](static/images/demo_screenshot.png)
-
 ## License
 MIT License
 
